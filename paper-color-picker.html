@@ -1,0 +1,131 @@
+<!--
+@license
+Copyright (c) 2015 The Polymer Project Authors. All rights reserved.
+This code may only be used under the BSD style license found at http://polymer.github.io/LICENSE.txt
+The complete set of authors may be found at http://polymer.github.io/AUTHORS.txt
+The complete set of contributors may be found at http://polymer.github.io/CONTRIBUTORS.txt
+Code distributed by Google as part of the polymer project is also
+subject to an additional IP rights grant found at http://polymer.github.io/PATENTS.txt
+-->
+
+<link rel="import" href="../polymer/polymer.html">
+<link rel="import" href="../paper-slider/paper-slider.html">
+
+<!--
+An element providing a solution to no problem in particular.
+
+Example:
+
+    <paper-color-picker></paper-color-picker>
+
+Example:
+
+    <paper-color-picker></paper-color-picker>
+
+@demo demo/index.html
+@hero hero.svg
+-->
+
+<dom-module id="paper-color-picker">
+    <template>
+        <style>
+            :host {
+                display: block;
+                overflow: hidden;
+            }
+
+            .paper-slider {
+                width: 50%;
+            }
+        </style>
+        <div class="paper-slider">
+            <div>
+                <div>R</div>
+                <paper-slider class="red" value="{{red}}" max="255" immediate-value="{{red}}" editable></paper-slider>
+            </div>
+            <div>
+                <div>G</div>
+                <paper-slider class="green" value="{{green}}" max="255" immediate-value="{{green}}"
+                              editable></paper-slider>
+            </div>
+            <div>
+                <div>B</div>
+                <paper-slider class="blue" value="{{blue}}" max="255" immediate-value="{{blue}}"
+                              editable></paper-slider>
+            </div>
+            <template is="dom-if" if="[[rgba]]">
+                <div>
+                    <div>&alpha;</div>
+                    <paper-slider max="1.0" value="{{alpha}}" step="0.01" immediate-value="{{alpha}}"
+                                  editable></paper-slider>
+                </div>
+            </template>
+        </div>
+    </template>
+
+    <script>
+        Polymer({
+            is: 'paper-color-picker',
+
+            properties: {
+                color: {
+                    type: String,
+                    notify: true,
+                    computed: '_computeColor(red,blue,green,alpha,rgb,hex,rgba)'
+                },
+                red: {
+                    type: Number,
+                    value: 0
+                },
+                blue: {
+                    type: Object,
+                    value: 0
+                },
+                green: {
+                    type: Object,
+                    value: 0
+                },
+                alpha: {
+                    type: Object,
+                    value: 1
+                },
+                rgba: {
+                    type: Boolean,
+                    value: false
+                },
+                hex: {
+                    type: Boolean,
+                    value: false
+                },
+                rgb: {
+                    type: Boolean,
+                    value: false
+                }
+            },
+            _computeColor: function (red, blue, green, alpha, rgb, hex, rgba) {
+                if (rgba) {
+                    return 'rgba(' + red + ',' + green + ',' + blue + ',' + alpha + ')';
+                }
+                if (rgb) {
+                    return 'rgb(' + red + ',' + green + ',' + blue + ')';
+                }
+                if (hex) {
+                    if (red.toString(16).length < 2) {
+                        red = '0' + red.toString(16);
+                    } else
+                        red = red.toString(16);
+                    if (green.toString(16).length < 2) {
+                        green = '0' + green.toString(16);
+                    } else
+                        green = green.toString(16);
+                    if (blue.toString(16).length < 2) {
+                        blue = '0' + blue.toString(16);
+                    } else
+                        blue = blue.toString(16);
+                    return '#' + red + green + blue;
+                }
+            }
+        })
+        ;
+    </script>
+</dom-module>

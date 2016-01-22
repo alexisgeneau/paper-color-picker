@@ -1,0 +1,28 @@
+{
+  "name": "paper-color-picker",
+  "version": "1.0.6",
+  "authors": [
+    "Alexisgeneau <contact@alexis-geneau.fr>"
+  ],
+  "description": "An element providing a solution to no problem in particular.",
+  "keywords": [
+    "web-component",
+    "polymer",
+    "seed"
+  ],
+  "main": "paper-color-picker.html",
+  "license": "http://polymer.github.io/LICENSE.txt",
+  "homepage": "https://github.com/alexisgeneau/seed-element/",
+  "ignore": [
+    "/.*",
+    "/test/"
+  ],
+  "dependencies": {
+    "polymer": "Polymer/polymer#^1.2.0",
+    "paper-slider": "PolymerElements/paper-slider#~1.0.9"
+  },
+  "devDependencies": {
+    "iron-component-page": "PolymerElements/iron-component-page#^1.0.0",
+    "web-component-tester": "^3.4.0"
+  }
+}
